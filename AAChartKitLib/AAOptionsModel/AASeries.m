@@ -22,7 +22,7 @@
  * -------------------------------------------------------------------------------
  * And if you want to contribute for this project, please contact me as well
  * GitHub        : https://github.com/AAChartModel
- * StackOverflow : https://stackoverflow.com/users/12302132/codeforu
+ * StackOverflow : https://stackoverflow.com/users/7842508/codeforu
  * JianShu       : https://www.jianshu.com/u/f1e6753d4254
  * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
  *
@@ -35,13 +35,7 @@
 
 @implementation AASeries
 
-AAPropSetFuncImplementation(AASeries, NSString     *, borderColor) //The border color, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderWidth) //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadius) //The corner radius of the border surrounding each column or bar.
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadiusTopLeft)
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadiusTopRight)
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadiusBottomLeft)
-AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadiusBottomRight)
+AAPropSetFuncImplementation(AASeries, NSNumber     *, borderRadius) 
 AAPropSetFuncImplementation(AASeries, AAMarker     *, marker) 
 AAPropSetFuncImplementation(AASeries, NSString     *, stacking) 
 AAPropSetFuncImplementation(AASeries, AAAnimation  *, animation) 
@@ -53,6 +47,10 @@ AAPropSetFuncImplementation(AASeries, AAShadow *, shadow)
 AAPropSetFuncImplementation(AASeries, AADataLabels *, dataLabels)
 AAPropSetFuncImplementation(AASeries, AAStates *, states)
 AAPropSetFuncImplementation(AASeries, AAPoint  *, point)
+AAPropSetFuncImplementation(AASeries, NSNumber *, borderRadiusTopLeft)
+AAPropSetFuncImplementation(AASeries, NSNumber *, borderRadiusTopRight)
+AAPropSetFuncImplementation(AASeries, NSNumber *, borderRadiusBottomLeft)
+AAPropSetFuncImplementation(AASeries, NSNumber *, borderRadiusBottomRight)
 
 @end
 

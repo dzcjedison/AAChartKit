@@ -24,7 +24,7 @@
  * -------------------------------------------------------------------------------
  * And if you want to contribute for this project, please contact me as well
  * GitHub        : https://github.com/AAChartModel
- * StackOverflow : https://stackoverflow.com/users/12302132/codeforu
+ * StackOverflow : https://stackoverflow.com/users/7842508/codeforu
  * JianShu       : https://www.jianshu.com/u/f1e6753d4254
  * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
  *
@@ -38,13 +38,7 @@
 
 @interface AASeries : NSObject
 
-AAPropStatementAndPropSetFuncStatement(copy,   AASeries, NSString     *, borderColor) //The border color, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderWidth) //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadius) //The corner radius of the border surrounding each column or bar.
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadiusTopLeft)
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadiusTopRight)
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadiusBottomLeft)
-AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadiusBottomRight)
+AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber     *, borderRadius) 
 AAPropStatementAndPropSetFuncStatement(strong, AASeries, AAMarker     *, marker) 
 AAPropStatementAndPropSetFuncStatement(copy,   AASeries, NSString     *, stacking) 
 AAPropStatementAndPropSetFuncStatement(strong, AASeries, AAAnimation  *, animation) 
@@ -59,6 +53,10 @@ AAPropStatementAndPropSetFuncStatement(strong, AASeries, AAShadow *, shadow)
 AAPropStatementAndPropSetFuncStatement(strong, AASeries, AADataLabels *, dataLabels)
 AAPropStatementAndPropSetFuncStatement(strong, AASeries, AAStates *, states)
 AAPropStatementAndPropSetFuncStatement(strong, AASeries, AAPoint  *, point)
+AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber *, borderRadiusTopLeft)
+AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber *, borderRadiusTopRight)
+AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber *, borderRadiusBottomLeft)
+AAPropStatementAndPropSetFuncStatement(strong, AASeries, NSNumber *, borderRadiusBottomRight)
 
 @end
 

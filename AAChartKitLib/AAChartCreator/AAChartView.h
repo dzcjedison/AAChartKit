@@ -22,18 +22,18 @@
  * -------------------------------------------------------------------------------
  * And if you want to contribute for this project, please contact me as well
  * GitHub        : https://github.com/AAChartModel
- * StackOverflow : https://stackoverflow.com/users/12302132/codeforu
+ * StackOverflow : https://stackoverflow.com/users/7842508/codeforu
  * JianShu       : https://www.jianshu.com/u/f1e6753d4254
  * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
  *
  * -------------------------------------------------------------------------------
  
  */
-
+#import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "AAOptions.h"
 
-@interface AAEventMessageModel : NSObject
+@interface AAMoveOverEventMessageModel : NSObject
 
 @property (nonatomic, copy)   NSString *name;
 @property (nonatomic, strong) NSNumber *x;
@@ -42,14 +42,6 @@
 @property (nonatomic, strong) NSDictionary *offset;
 @property (nonatomic, assign) NSUInteger index;
 
-@end
-
-
-@interface AAClickEventMessageModel : AAEventMessageModel
-@end
-
-
-@interface AAMoveOverEventMessageModel : AAEventMessageModel
 @end
 
 
@@ -62,12 +54,6 @@
 /// The delegate method of chart view finish loading
 /// @param aaChartView AAChartView object instance
 - (void)aaChartViewDidFinishLoad:(AAChartView *)aaChartView;
-
-
-/// The delegate method of getting click event message model
-/// @param aaChartView The instance object of chart view
-/// @param message User finger click event message model
-- (void)aaChartView:(AAChartView *)aaChartView clickEventWithMessage:(AAClickEventMessageModel *)message;
 
 /// The delegate method of getting move over event message model
 /// @param aaChartView The instance object of chart view
@@ -83,24 +69,31 @@
 @end
 
 typedef void(^AADidFinishLoadBlock)(AAChartView *aaChartView);
-typedef void(^AAClickEventBlock)(AAChartView *aaChartView, AAClickEventMessageModel *message);
 typedef void(^AAMoveOverEventBlock)(AAChartView *aaChartView, AAMoveOverEventMessageModel *message);
 typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScriptMessage *message);
 
 
-@interface AAChartView : WKWebView
+@interface AAChartView:WKWebView
 
-#if TARGET_OS_IPHONE
+
+/// The AAChartView did finish load event and move over event delegate
+@property (nonatomic, weak)   id<AAChartViewEventDelegate> delegate;
+
 /// Configure the behavior of adjustedContentInset.
 /// Default is UIScrollViewContentInsetAdjustmentAutomatic.
 @property(nonatomic) UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior API_AVAILABLE(ios(11.0),tvos(11.0));
 
+/// The block method of chart view finish loading
+@property (nonatomic, copy) AADidFinishLoadBlock didFinishLoadBlock;
+
+/// The block method of user finger move over event
+@property (nonatomic, copy) AAMoveOverEventBlock moveOverEventBlock;
+
+/// The block method that did receive JavaScript event Message
+@property (nonatomic, copy) AADidReceiveScriptMessageBlock didReceiveScriptMessageBlock;
+
 /// Set the chart view can scroll or not
 @property (nonatomic, assign) BOOL scrollEnabled;
-#endif
-
-/// Set the chart view background color be clear
-@property (nonatomic, assign) BOOL isClearBackgroundColor;
 
 /// Content width of AAChartView
 @property (nonatomic, assign) CGFloat  contentWidth;
@@ -111,31 +104,15 @@ typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScript
 /// Hide chart series content or not
 @property (nonatomic, assign) BOOL chartSeriesHidden;
 
-/// The AAChartView did finish load event and move over event delegate
-@property (nonatomic, weak)   id<AAChartViewEventDelegate> delegate;
-
-/// The block method of chart view finish loading
-@property (nonatomic, copy) AADidFinishLoadBlock didFinishLoadBlock;
-
-/// The block method of user finger click event
-@property (nonatomic, copy) AAClickEventBlock clickEventBlock;
-
-/// The block method of user finger move over event
-@property (nonatomic, copy) AAMoveOverEventBlock moveOverEventBlock;
-
-/// The block method that did receive JavaScript event Message
-@property (nonatomic, copy) AADidReceiveScriptMessageBlock didReceiveScriptMessageBlock;
+/// Set the chart view background color be clear
+@property (nonatomic, assign) BOOL isClearBackgroundColor;
 
 
 /// Chart view finish loading event handler
 /// @param handler event handler
 - (void)didFinishLoadHandler:(AADidFinishLoadBlock)handler;
 
-/// Chart view getting click event message model
-/// @param handler event handler
-- (void)clickEventHandler:(AAClickEventBlock)handler;
-
-/// Chart view getting move over event message model
+/// Chart view getting moved over event message model
 /// @param handler event handler
 - (void)moveOverEventHandler:(AAMoveOverEventBlock)handler;
 
@@ -144,7 +121,7 @@ typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScript
 - (void)didReceiveScriptMessageHandler:(AADidReceiveScriptMessageBlock)handler;
 
 
-#pragma mark - Configure Chart View Content With AAChartModel
+#pragma CONFIGURE THE CHART VIEW CONTENT WITH AACHARTMODEL
 
 /// Function of drawing chart view
 /// @param chartModel The instance object of AAChartModel
@@ -164,7 +141,7 @@ typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScript
 - (void)aa_refreshChartWithChartModel:(AAChartModel *)chartModel;
 
 
-#pragma mark - Configure Chart View Content With AAOptions
+#pragma CONFIGURE THE CHART VIEW CONTENT WITH AAOPTIONS
 
 /// Function of drawing chart view
 /// @param options The instance object of AAOptions
@@ -279,7 +256,7 @@ typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScript
 /// @param animation Have animation effect or not
 - (void)aa_redrawWithAnimation:(BOOL)animation;
 
-#if TARGET_OS_IPHONE
+
 /// Set the chart view content be adaptive to screen rotation with default animation effect
 - (void)aa_adaptiveScreenRotation;
 
@@ -288,7 +265,7 @@ typedef void(^AADidReceiveScriptMessageBlock)(AAChartView *aaChartView, WKScript
 ///
 /// @param animation The instance object of AAAnimation
 - (void)aa_adaptiveScreenRotationWithAnimation:(AAAnimation *)animation;
-#endif
+
 
 /// Change chart view content size
 /// @param width content size width
